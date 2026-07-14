@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>잠시만 기다려주세요</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:linear-gradient(135deg,#03C75A,#00b894);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Malgun Gothic',sans-serif;
+    color:white;
+}
+
+.container{
+    text-align:center;
+}
+
+.logo{
+    width:180px;
+    max-width:70%;
+    margin-bottom:35px;
+}
+
+.count{
+    font-size:100px;
+    font-weight:bold;
+    margin-bottom:20px;
+    animation:pop 1s infinite;
+}
+
+.text{
+    font-size:22px;
+    opacity:0.95;
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0.4);
+        opacity:0;
+    }
+    40%{
+        transform:scale(1.25);
+        opacity:1;
+    }
+    70%{
+        transform:scale(0.95);
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.fade{
+    animation:pop 1s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 로고 -->
+    <img src="logo.png" class="logo" alt="Logo">
+
+    <!-- 카운트 -->
+    <div class="count" id="count">3</div>
+
+    <div class="text">
+        잠시 후 네이버 블로그로 이동합니다.
+    </div>
+
+</div>
+
+<script>
+
+const target = "https://blog.naver.com/tossman-/224346407417";
+
+let number = 3;
+const count = document.getElementById("count");
+
+const timer = setInterval(() => {
+
+    number--;
+
+    if(number > 0){
+
+        count.textContent = number;
+
+        // 애니메이션 다시 실행
+        count.classList.remove("fade");
+        void count.offsetWidth;
+        count.classList.add("fade");
+
+    }else{
+
+        clearInterval(timer);
+
+        count.textContent = "GO!";
+        count.classList.remove("fade");
+        void count.offsetWidth;
+        count.classList.add("fade");
+
+        setTimeout(()=>{
+            window.location.href = target;
+        },700);
+
+    }
+
+},1000);
+
+</script>
+
+</body>
+</html>
